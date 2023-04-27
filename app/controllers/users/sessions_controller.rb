@@ -3,7 +3,20 @@
 class Users::SessionsController < Devise::SessionsController
   # before_action :configure_sign_in_params, only: [:create]
 
-   before_action :find_user, only: :create
+  def after_sign_in_path_for(resource)
+    case current_user.role
+    when "admin"
+      admin_index_path
+    when "encargado"
+      encargado_index_path
+    when "estudiante"
+      estudiante_index_path
+    else
+      root_path
+    end
+  end
+
+  before_action :find_user, only: :create
 
   private
 
