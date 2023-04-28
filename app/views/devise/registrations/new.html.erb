@@ -23,6 +23,9 @@
       </div>
     </div>
 
+    <%= f.select :role, options_for_select(['estudiante'], 'estudiante'), {}, class: "form-control", style: "display:none" %>
+
+
     <div class="form-group">
       <%= f.label :password, class: "d-block" %>
       <% if @minimum_password_length %>

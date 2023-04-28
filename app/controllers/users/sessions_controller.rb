@@ -11,8 +11,6 @@ class Users::SessionsController < Devise::SessionsController
       encargado_index_path
     when "estudiante"
       estudiante_index_path
-    else
-      root_path
     end
   end
 
