@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   patch 'admin/:id', to: 'admin#update', as: 'admin_update'
   get 'admin/users', to: 'admin#users', as: 'admin_users'
   get 'admin/index', to: 'admin#index', as: 'admin_index'
+  delete '/admin/users/:id', to: 'admin#destroy', as: 'admin_delete'
 
 
 

@@ -1,44 +1,68 @@
 <header>
   <nav class="navbar navbar-dark bg-dark">
+
     <%= link_to 'Log Out', destroy_user_session_path, :method => 'delete' %>
   </nav>
 </header>
-
-<% if @users.any? %>
-  <%= form_tag admin_index_path, method: :get, class: "form-inline my-2 my-lg-0" do %>
-    <input class="form-control mr-sm-2" type="text" placeholder="Numero de cuenta" aria-label="Search" name="search">
-    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
-  <% end %>
-
-  <table>
-    <thead>
-      <tr>
-        <th>Nombre</th>
-        <th>Numero de Cuenta</th>
-        <th>Email</th>
-        <th>Rol</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @users.each do |user| %>
-        <% unless user.role == "admin" %>
-          <tr>
-            <td><%= user.name %></td>
-            <td><%= user.nacount %></td>
-            <td><%= user.email %></td>
-            <td>
-              <%= form_for user, url: admin_update_path(user), method: :patch do |f| %>
-                <%= f.select :role, options_for_select(['encargado', 'estudiante'], user.role), { prompt: "Seleccionar un rol" }, class: "form-control", onchange: "this.form.submit()" %>
-              <% end %>
-            </td>
-          </tr>
-        <% end %>
+<div class = "m-5">
+  <% if @users.any? %>
+    <div class="d-flex justify-content-center align-items-center my-4">
+      <%= form_tag admin_index_path, method: :get, class: "form-inline" do %>
+        <div class="input-group">
+          <%= text_field_tag :search, params[:search], class: "form-control mr-sm-2 w-50", placeholder: "Numero de cuenta" %>
+          <div class="input-group-append">
+            <%= button_tag class: "btn btn-outline-dark", type: "submit" do %>
+              <i class="fa fa-search"></i> Buscar
+            <% end %>
+          </div>
+        </div>
       <% end %>
-    </tbody>
-  </table>
-<% else %>
-  <p><%= flash[:notice] %></p>
-  <%= form_tag admin_index_path, method: :get, class: "form-inline my-2 my-lg-0" do %>
-    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Ver todos los usuarios</button>
+    </div>
+
+
+  <div class="table-responsive">
+    <table class="table mx-auto w-50 table-bordered shadow">
+      <thead>
+        <tr  class="table-secondary">
+          <th>Nombre</th>
+          <th>Numero de Cuenta</th>
+          <th>Email</th>
+          <th>Rol</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @users.each do |user| %>
+          <% unless user.role == "admin" %>
+            <tr>
+              <td><%= user.name %></td>
+              <td><%= user.nacount %></td>
+              <td><%= user.email %></td>
+              <td>
+                <%= form_for user, url: admin_update_path(user), method: :patch do |f| %>
+                  <%= f.select :role, options_for_select(['encargado', 'estudiante'], user.role), { prompt: "Seleccionar un rol" }, class: "form-control", onchange: "this.form.submit()" %>
+                <% end %>
+              </td>
+              <td>
+                <%= form_for user, url: admin_delete_path(user), method: :delete do |f| %>
+                  <%= f.button class: "btn btn-danger", title: "Eliminar", onclick: "return confirm('¿Estás seguro que deseas eliminar a #{user.name}?')" do %>
+                    <i class="fas fa-trash">Eliminar</i>
+                  <% end %>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        <% end %>
+      </tbody>
+    </table>
+
+  </div>
+
+  <% else %>
+    <p><%= flash[:notice] %></p>
+    <%= form_tag admin_index_path, method: :get, class: "form-inline my-2 my-lg-0" do %>
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Ver todos los usuarios</button>
+    <% end %>
   <% end %>
-<% end %>
+
+</div>

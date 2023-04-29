@@ -9,6 +9,12 @@ class AdminController < ApplicationController
     end
   end  
 
+  def destroy
+    @users = User.find(params[:id])
+    @users.destroy
+    redirect_to admin_index_path
+  end
+
   def edit
     @user = User.find(params[:id])
   end
