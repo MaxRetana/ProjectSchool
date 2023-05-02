@@ -2,7 +2,7 @@ class AdminController < ApplicationController
   before_action :authenticate_user!
   def index
     if params[:search]
-      @users = User.where(nacount: params[:search])
+      @users = User.where(nacount: params[:search]).or(User.where(role: params[:search]))
       flash[:notice] = "Usuario no encontrado" if @users.empty?
     else
       @users = User.order(:id)
@@ -36,5 +36,8 @@ class AdminController < ApplicationController
     params.require(:user).permit(:name, :email, :role)
   end
   
+  def club_params
+    params.require(:club).permit(:name, :capacity, :description)
+  end
   
 end

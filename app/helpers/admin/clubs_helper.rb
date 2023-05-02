@@ -1,0 +1,2 @@
+module Admin::ClubsHelper
+end

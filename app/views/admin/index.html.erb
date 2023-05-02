@@ -1,15 +1,10 @@
-<header>
-  <nav class="navbar navbar-dark bg-dark">
 
-    <%= link_to 'Log Out', destroy_user_session_path, :method => 'delete' %>
-  </nav>
-</header>
 <div class = "m-5">
   <% if @users.any? %>
     <div class="d-flex justify-content-center align-items-center my-4">
       <%= form_tag admin_index_path, method: :get, class: "form-inline" do %>
         <div class="input-group">
-          <%= text_field_tag :search, params[:search], class: "form-control mr-sm-2 w-50", placeholder: "Numero de cuenta" %>
+          <%= text_field_tag :search, params[:search], class: "form-control mr-sm-2 w-50", placeholder: "Numero de cuenta / Rol" %>
           <div class="input-group-append">
             <%= button_tag class: "btn btn-outline-dark", type: "submit" do %>
               <i class="fa fa-search"></i> Buscar
@@ -21,7 +16,7 @@
 
 
   <div class="table-responsive">
-    <table class="table mx-auto w-50 table-bordered shadow">
+    <table class="table mx-auto w-50 shadow">
       <thead>
         <tr  class="table-secondary">
           <th>Nombre</th>

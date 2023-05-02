@@ -6,6 +6,7 @@ Rails.application.routes.draw do
     confirmations: 'users/confirmations',
     unlocks: 'users/unlocks'
   }
+  
   devise_scope :user do
     get '/users/sign_out' => 'devise/sessions#destroy'
   end
@@ -13,19 +14,14 @@ Rails.application.routes.draw do
   patch 'admin/:id', to: 'admin#update', as: 'admin_update'
   get 'admin/users', to: 'admin#users', as: 'admin_users'
   get 'admin/index', to: 'admin#index', as: 'admin_index'
+  get '/nuevo-club', to: 'clubs#new_modal', as: 'new_club_modal'
+
   delete '/admin/users/:id', to: 'admin#destroy', as: 'admin_delete'
-
-
-
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-
-  # Defines the root path route ("/")
-  # root "articles#index"'
 
   root 'home#index'
   resources :users
   resources :admin
+  resources :clubs
   resources :encargado
   resources :estudiante
-
 end

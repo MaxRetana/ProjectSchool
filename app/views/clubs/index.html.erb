@@ -1,0 +1,45 @@
+<div class = "m-5">
+  <button onclick="abrirModal()">Crear nuevo club</button>
+
+  <%= render 'modalclub' %>
+
+  <div class="table-responsive">
+    <table class="table mx-auto w-50 shadow">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Capacity</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @clubs.each do |club| %>
+          <tr>
+            <td><%= club.name %></td>
+            <td><%= club.capacity %></td>
+            <td><%= club.description %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<script>
+  function abrirModal() {
+    $('#crear-club-modal').modal('show');
+    $.ajax({
+      url: '<%= new_club_modal_path %>',
+      success: function(data) {
+        $('#crear-club-modal .modal-body').html(data);
+        $('.close').on('click', function() {
+          $('#crear-club-modal').modal('hide');
+        });
+
+
+      }
+    });
+  }
+</script>
+
+
