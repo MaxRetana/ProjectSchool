@@ -17,7 +17,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_29_040113) do
   create_table "clubs", force: :cascade do |t|
     t.string "name"
     t.integer "capacity"
-    t.text "description"
+    t.string "description"
+    t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

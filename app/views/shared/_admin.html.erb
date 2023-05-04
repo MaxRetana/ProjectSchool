@@ -1,8 +1,10 @@
-<nav class="navbar navbar-dark bg-dark">
-  <% if !(controller_name == "admin" && action_name == "index") %>
-    <button onclick="goBack()">Volver</button>
-  <% end %>
-  <%= link_to "Ver clubs", clubs_path %>
-  <%= link_to 'Log Out', destroy_user_session_path, :method => 'delete' %>
-</nav>
+<% if !(controller_name == "clubs" && action_name == "new_modal") %>
+  <nav class="navbar navbar-dark bg-dark">
+    <% if !(controller_name == "admin" && action_name == "index") %>
+      <button onclick="goBack()">Volver</button>
+    <% end %>
+    <%= link_to "Ver clubs", clubs_path %>
+    <%= link_to 'Log Out', destroy_user_session_path, :method => 'delete' %>
+  </nav>
+<% end %>
 

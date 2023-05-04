@@ -1,5 +1,5 @@
 <div class = "m-5">
-  <button onclick="abrirModal()">Crear nuevo club</button>
+  <button class = "btn btn-outline-dark" onclick="abrirModal()">Crear nuevo club</button>
 
   <%= render 'modalclub' %>
 
@@ -7,8 +7,9 @@
     <table class="table mx-auto w-50 shadow">
       <thead>
         <tr>
-          <th>Name</th>
-          <th>Capacity</th>
+          <th>Nombre</th>
+          <th>Capacidad</th>
+          <th>Encargado</th>
           <th>Description</th>
         </tr>
       </thead>
@@ -17,6 +18,7 @@
           <tr>
             <td><%= club.name %></td>
             <td><%= club.capacity %></td>
+            <td><%= club.user.name %></td>
             <td><%= club.description %></td>
           </tr>
         <% end %>

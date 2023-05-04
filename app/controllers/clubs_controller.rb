@@ -4,10 +4,12 @@ class ClubsController < ApplicationController
   end
 
   def new
+    @users = User.where(role: 'encargado')
     @club = Club.new
   end
 
   def new_modal
+    @users = User.where(role: 'encargado')
     @club = Club.new
     render 'new'
   end
@@ -24,7 +26,8 @@ class ClubsController < ApplicationController
   private
 
   def club_params
-    params.require(:club).permit(:name, :capacity, :description)
+    params.require(:club).permit(:name, :capacity, :user_id, :description)
   end
+  
 end
 
