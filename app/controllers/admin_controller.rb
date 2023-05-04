@@ -5,7 +5,7 @@ class AdminController < ApplicationController
       @users = User.where(nacount: params[:search]).or(User.where(role: params[:search]))
       flash[:notice] = "Usuario no encontrado" if @users.empty?
     else
-      @users = User.order(:id)
+      @users = User.order(:created_at)
     end
   end  
 

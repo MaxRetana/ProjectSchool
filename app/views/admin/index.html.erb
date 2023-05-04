@@ -29,7 +29,7 @@
       <tbody>
         <% @users.each do |user| %>
           <% unless user.role == "admin" %>
-            <tr>
+            <%= content_tag :tr, class: "#{user.role == 'encargado' ? 'bg-green-pastel' : ''}" do %>
               <td><%= user.name %></td>
               <td><%= user.nacount %></td>
               <td><%= user.email %></td>
@@ -44,10 +44,8 @@
                     <i class="fas fa-trash">Eliminar</i>
                   <% end %>
                 <% end %>
-
-
               </td>
-            </tr>
+            </tr> <% end %>
           <% end %>
         <% end %>
       </tbody>
