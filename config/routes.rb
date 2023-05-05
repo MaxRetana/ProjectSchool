@@ -17,8 +17,11 @@ Rails.application.routes.draw do
   get '/nuevo-club', to: 'clubs#new_modal', as: 'new_club_modal'
 
   delete '/admin/users/:id', to: 'admin#destroy', as: 'admin_delete'
+  delete '/clubs/:id', to: 'clubs#destroy', as: 'clubs_delete'
 
-  root 'home#index'
+
+  root 'estudiante#index'
+  
   resources :users
   resources :admin
   resources :clubs

@@ -1,3 +1,37 @@
-<h1>Encargado#index</h1>
-<p>Find me in app/views/encargado/index.html.erb</p>
-<%= link_to 'Log Out', destroy_user_session_path, :method => 'delete' %>
+<h1>Encargado</h1>
+
+<div class="container">
+  <button class = "btn btn-outline-dark" onclick="abrirModal()">Crear nuevo club</button>
+  <%= render 'shared/modalclub' %>
+  <div class="row row-cols-1 row-cols-md-2 g-4">
+    <% @clubs.where(user_id: current_user.id).each do |club| %>
+      <div class="col">
+        <div class="card shadow">
+          <div class="card-body">
+            <h5 class="card-title"><%= club.name %></h5>
+            <p class="card-text">Capacidad: <%= club.capacity %></p>
+            <p class="card-text">Encargado: <%= club.user.name %></p>
+            <p class="card-text">Descripción: <%= club.description %></p>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<script>
+  function abrirModal() {
+    $('#crear-club-modal').modal('show');
+    $.ajax({
+      url: '<%= new_club_modal_path %>',
+      success: function(data) {
+        $('#crear-club-modal .modal-body').html(data);
+        $('.close').on('click', function() {
+          $('#crear-club-modal').modal('hide');
+        });
+
+
+      }
+    });
+  }
+</script>

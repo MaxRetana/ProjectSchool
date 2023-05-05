@@ -1,7 +1,7 @@
 <div class = "m-5">
   <button class = "btn btn-outline-dark" onclick="abrirModal()">Crear nuevo club</button>
 
-  <%= render 'modalclub' %>
+  <%= render 'shared/modalclub' %>
 
   <div class="table-responsive">
     <table class="table mx-auto w-50 shadow">
@@ -11,6 +11,7 @@
           <th>Capacidad</th>
           <th>Encargado</th>
           <th>Description</th>
+          <th>Acciones</th>
         </tr>
       </thead>
       <tbody>
@@ -20,6 +21,13 @@
             <td><%= club.capacity %></td>
             <td><%= club.user.name %></td>
             <td><%= club.description %></td>
+            <td>
+                <%= form_for club, url: clubs_delete_path(club), method: :delete do |f| %>
+                  <%= f.button class: "btn btn-danger", title: "Eliminar", onclick: "return confirm('¿Estás seguro que deseas eliminar a #{club.name}?')" do %>
+                    <i class="fas fa-trash">Eliminar</i>
+                  <% end %>
+                <% end %>
+              </td>
           </tr>
         <% end %>
       </tbody>

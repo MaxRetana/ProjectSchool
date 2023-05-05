@@ -8,6 +8,13 @@ class ClubsController < ApplicationController
     @club = Club.new
   end
 
+  def destroy
+    @clubs = Club.find(params[:id])
+    @clubs.destroy
+    redirect_to clubs_path
+  end
+
+
   def new_modal
     @users = User.where(role: 'encargado')
     @club = Club.new
@@ -17,7 +24,11 @@ class ClubsController < ApplicationController
   def create
     @club = Club.new(club_params)
     if @club.save
-      redirect_to clubs_path
+      if current_user.role == "encargado"
+        redirect_to encargado_index_path
+      else
+        redirect_to clubs_path
+      end
     else
       render 'new'
     end
