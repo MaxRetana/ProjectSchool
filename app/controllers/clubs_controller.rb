@@ -14,6 +14,10 @@ class ClubsController < ApplicationController
     redirect_to clubs_path
   end
 
+  def show
+    @club = Club.find(params[:id])
+  end
+  
 
   def new_modal
     @users = User.where(role: 'encargado')
