@@ -1,0 +1,32 @@
+<%= form_with(model: [@club, @task], url: tasks_path) do |f| %>
+   <div class="field">
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= f.label :description %>
+    <%= f.text_area :description %>
+  </div>
+
+  <div class="field">
+    <%= f.label :file %>
+    <%= f.text_field :file %>
+  </div>
+
+  <div class="field">
+    <%= f.label :delivered %>
+    <%= f.date_field :delivered %>
+  </div>
+
+  <div class="field">
+    <%= f.hidden_field :user_id, value: current_user.id %>
+  </div>
+
+  <div class="form-group">
+    <%= f.hidden_field :club_id, value: @club.id %>
+  </div>
+
+  <%= f.submit%>
+  
+<% end %>

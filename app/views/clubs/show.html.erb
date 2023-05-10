@@ -1,0 +1,42 @@
+<button class = "btn btn-outline-dark" onclick="abrirModal()">Crear nueva tarea</button>
+
+<%= render 'shared/modaltask' %>
+
+<div class="table-responsive">
+    <table class="table mx-auto w-50 shadow">
+      <thead>
+        <tr  class="table-secondary">
+          <th>Nombre</th>
+          <th>Descripcion</th>
+          <th>archivo</th>
+          <th>Fecha de entrega</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <% @tasks.where(club_id: @club.id).each do |task| %>
+          <td><%= task.name %></td>
+          <td><%= task.description %></td>
+          <td><%= task.file %></td>
+          <td><%= task.delivered %></td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+  </div>
+
+<script>
+  function abrirModal() {
+    $('#crear-task-modal').modal('show');
+    $.ajax({
+      url: '<%= new_task_modal_path(id: @club.id) %>',
+      success: function(data) {
+        $('#crear-task-modal .modal-body').html(data);
+        $('.close').on('click', function() {
+          $('#crear-task-modal').modal('hide');
+        });
+      }
+    });
+  }
+</script>

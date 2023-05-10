@@ -15,6 +15,10 @@ Rails.application.routes.draw do
   get 'admin/users', to: 'admin#users', as: 'admin_users'
   get 'admin/index', to: 'admin#index', as: 'admin_index'
   get '/nuevo-club', to: 'clubs#new_modal', as: 'new_club_modal'
+  get '/nuevo-task', to: 'clubs#new_task_modal', as: 'new_task_modal'
+
+  
+
 
   delete '/admin/users/:id', to: 'admin#destroy', as: 'admin_delete'
   delete '/clubs/:id', to: 'clubs#destroy', as: 'clubs_delete'
@@ -27,4 +31,5 @@ Rails.application.routes.draw do
   resources :clubs
   resources :encargado
   resources :estudiante
+  resources :tasks
 end
